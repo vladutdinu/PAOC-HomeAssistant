@@ -1,0 +1,12 @@
+<div class="header">
+    <div class="links"> <button mat-button class="button" routerLink=''>Home</button>
+        <button mat-button class="button" [matMenuTriggerFor]="menu">Results</button>
+        <mat-menu #menu="matMenu" class="matMenu">
+            <button mat-menu-item (click)="navigate(0)">All charts</button>
+            <button mat-menu-item (click)="navigate(1)">Temperatura</button>
+            <button mat-menu-item (click)="navigate(2)">Umiditate</button>
+            <button mat-menu-item (click)="navigate(3)">Gaz</button>
+        </mat-menu>
+    </div>
+</div>
+<mat-divider></mat-divider>

@@ -1,0 +1,35 @@
+.footer {
+    // position: fixed;
+    padding-top: 50px;
+    height: 100px;
+    background-color: black;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    font-size: medium;
+}
+
+.footer div:nth-child(1) {
+    width: 40%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer div:nth-child(2) {
+    width: 20%;
+    text-align: center;
+}
+
+.footer div:nth-child(3) {
+    text-align: center;
+    width: 30%;
+    padding-right: 10%;
+    h1 {
+        color: red;
+    }
+}

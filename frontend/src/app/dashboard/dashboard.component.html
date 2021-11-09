@@ -1,0 +1,22 @@
+<div class="page" [ngClass]="{'soloChart': chart!=0}">
+    <div id="charts" class="charts">
+        <div *ngIf="chart==3 || chart==0" class="chart" [ngClass]="{'chart-temp': chart==3}">
+            <p>
+                <mat-icon>cloud_queue</mat-icon> Gaz</p>
+            <app-gaz (click)="goTo(1)"></app-gaz>
+        </div>
+
+
+        <div *ngIf="chart==2 || chart==0" class="chart" [ngClass]="{'chart-temp': chart==2}">
+            <p>
+                <mat-icon>invert_colors</mat-icon> Umiditate</p>
+            <app-umiditate (click)="goTo(2)"></app-umiditate>
+        </div>
+    </div>
+
+    <div *ngIf="chart==1 || chart==0" class="chart chart-temp">
+        <p>
+            <mat-icon>wb_sunny</mat-icon> Temperatura</p>
+        <app-temperatura (click)="goTo(3)"></app-temperatura>
+    </div>
+</div>
