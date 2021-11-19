@@ -14,6 +14,7 @@ export class GazComponent implements OnInit {
   constructor(private gazServises: GazService) { }
 
   ngOnInit(): void {
+
   }
   // Array of different segments in chart
   lineChartData: ChartDataSets[] = [
