@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { TempApaModel } from 'src/app/models/TempApaModel';
 import { TemperaturaService } from 'src/app/services/temperatura.service';
 @Component({
   selector: 'app-temperatura',
@@ -9,17 +10,22 @@ import { TemperaturaService } from 'src/app/services/temperatura.service';
 })
 export class TemperaturaComponent implements OnInit {
 
-  constructor(private tempServise: TemperaturaService) { }
+  constructor(private tempService: TemperaturaService) { }
+  temp: TempApaModel[] = [];
 
   ngOnInit(): void {
+    this.tempService.getTempAndUmiditateValues().subscribe(data => {
+      this.temp = data as TempApaModel[];
+      console.log(this.temp);
+    })
   }
   // Array of different segments in chart
   lineChartData: ChartDataSets[] = [
-    { data: [...this.tempServise.data], label: 'temperatura' },
+    { data: [...this.tempService.data], label: 'temperatura' },
   ];
 
   //Labels shown on the x-axis
-  lineChartLabels: Label[] = [...this.tempServise.lineChartLabels];
+  lineChartLabels: Label[] = [...this.tempService.lineChartLabels];
 
   // Define chart options
   lineChartOptions: ChartOptions = {

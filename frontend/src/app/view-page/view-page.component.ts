@@ -10,7 +10,7 @@ export class ViewPageComponent implements OnInit {
   constructor() {
 
   }
-  gaz = 5.3;
+  gaz = 0.2;
   temp = 2.4;
   apa = 4.8;
   interval: any;
@@ -18,8 +18,9 @@ export class ViewPageComponent implements OnInit {
   ngOnInit(): void {
     this.interval = setInterval(() => {
       //this.gaz = this.gaz + 1;
-      // api call
+      //api call
     }, 1000);
+
   }
 
 

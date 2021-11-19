@@ -20,6 +20,7 @@ import { TemperaturaComponent } from './chart/temperatura/temperatura.component'
 import { UmiditateComponent } from './chart/umiditate/umiditate.component';
 import { ViewPageComponent } from './view-page/view-page.component';
 import { GazService } from './services/gaz.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { GazService } from './services/gaz.service';
     ViewPageComponent,
   ],
   imports: [
+    HttpClientModule,
     ChartsModule,
     MatDividerModule,
     MatMenuModule,
