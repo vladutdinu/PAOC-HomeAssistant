@@ -1,12 +1,49 @@
 <div class="header">
-    <div class="links"> <button mat-button class="button" routerLink=''>Home</button>
-        <button mat-button class="button" [matMenuTriggerFor]="menu">Results</button>
+    <div class="links">
+        <!-- <button mat-button class="button" routerLink=''>Home</button> -->
+        <a routerLink='' class="code_view actionBtn19">
+            <span class="lb">Home</span>
+        </a>
+        <button mat-button class="code_view actionBtn21" [matMenuTriggerFor]="menu"> <i class="ico-plus2">
+          <span></span>
+          <span></span>
+          </i> <span class="lb">Results</span>
+          </button>
         <mat-menu #menu="matMenu" class="matMenu">
             <button mat-menu-item (click)="navigate(0)">All charts</button>
             <button mat-menu-item (click)="navigate(1)">Temperatura</button>
             <button mat-menu-item (click)="navigate(2)">Umiditate</button>
             <button mat-menu-item (click)="navigate(3)">Gaz</button>
         </mat-menu>
+    </div>
+    <div class="led">
+        <a (click)="room1()" class="code_view actionBtn9" [ngClass]="{'actionBtn10': led1==1}">
+            <span class="txt">room1</span>
+            <span class="bubble_inner">
+        <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            </span>
+        </a>
+        <a (click)="room2()" class="code_view actionBtn9" [ngClass]="{'actionBtn10': led2==1}">
+            <span class="txt">room2</span>
+            <span class="bubble_inner">
+      <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            </span>
+        </a>
+        <a (click)="room3()" class="code_view actionBtn9" [ngClass]="{'actionBtn10': led3==1}">
+            <span class="txt">room3</span>
+            <span class="bubble_inner">
+    <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            <span class="bubble"></span>
+            </span>
+        </a>
     </div>
 </div>
 <mat-divider></mat-divider>

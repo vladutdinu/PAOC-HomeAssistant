@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TempApaModel } from '../models/TempApaModel';
+import { TempModel } from '../models/TempModel';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,18 @@ export class TemperaturaService {
   lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   constructor(public httpClient: HttpClient) { }
 
-  url = 'localhost:8080/temps';
-  getTempAndUmiditateValues(): Observable<TempApaModel[]> {
-    return this.httpClient.get(this.url) as Observable<TempApaModel[]>;
+  url = `http://192.168.0.101:8080/`;
+  getTempAndUmiditateValue(): Observable<TempModel> {
+    //  console.log(this.httpClient.get(this.url) as Observable<TempApaModel>);
+    return this.httpClient.get(this.url + `temps`) as Observable<TempModel>;
+  }
 
+  //getTempValues() {
+
+  //  return this.httpClient.get<TempApaModel>(this.url + `temperaturi`);
+  //}
+  getTempValues(): Observable<TempApaModel> {
+    //  console.log(this.httpClient.get(this.url) as Observable<TempApaModel>);
+    return this.httpClient.get(this.url + `temperaturi`) as Observable<TempApaModel>;
   }
 }

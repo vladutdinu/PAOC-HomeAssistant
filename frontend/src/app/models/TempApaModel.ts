@@ -1,5 +1,7 @@
 export class TempApaModel {
 
-  constructor(public date: Date, public humidity: number, public temp: number) {
+  constructor(public temp: number[], public time: String[]) {
   }
+
+
 }

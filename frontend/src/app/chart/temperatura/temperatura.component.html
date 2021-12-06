@@ -1,4 +1,12 @@
-<div class="chartjs-container temp">
-    <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins" (chartHover)="chartHovered($event)">
-</canvas>
+<div class="page">
+    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+        <div *cdkVirtualFor="let item of Data" class="Items">
+            <p>
+                <i>  {{ item.time }}</i>
+            </p>
+            <p>
+                <i>  {{ item.temp }} ℃ </i>
+            </p>
+        </div>
+    </cdk-virtual-scroll-viewport>
 </div>

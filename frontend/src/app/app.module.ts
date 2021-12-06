@@ -21,11 +21,15 @@ import { UmiditateComponent } from './chart/umiditate/umiditate.component';
 import { ViewPageComponent } from './view-page/view-page.component';
 import { GazService } from './services/gaz.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TemperaturaService } from './services/temperatura.service';
+import { UmiditateService } from './services/umiditate.service';
+import { MatTableModule } from '@angular/material/table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { LedService } from './services/led.service';
 
 
 @NgModule({
   declarations: [
-
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -36,6 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
     ViewPageComponent,
   ],
   imports: [
+    ScrollingModule,
+    MatTableModule,
     HttpClientModule,
     ChartsModule,
     MatDividerModule,
@@ -51,6 +57,6 @@ import { HttpClientModule } from '@angular/common/http';
     LayoutModule
   ],
   providers: [],
-  bootstrap: [AppComponent, GazService]
+  bootstrap: [AppComponent, GazService, TemperaturaService, UmiditateService, LedService]
 })
 export class AppModule { }
