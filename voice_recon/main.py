@@ -3,7 +3,7 @@
 import speech_recognition as sr
 import time
 from DHT11Test import temp
-from lights import led
+import lights
 # this is called from the background thread
 def callback(recognizer, audio):
     # received audio data, now we'll recognize it using Google Speech Recognition
@@ -14,9 +14,14 @@ def callback(recognizer, audio):
         test_val = recognizer.recognize_google(audio)
         print("You said " + test_val)
         if "weath" in test_val.lower():
-            temp()
-        if "light" in test_val.lower():
-            led()
+            lights.wind()
+        elif "gard" in test_val.lower():
+            lights.garden()
+        elif "bed" in test_val.lower():
+            lights.bedroom()
+        elif "livin" in test_val.lower():
+            lights.living_room()
+        
     except sr.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
     except sr.RequestError as e:
