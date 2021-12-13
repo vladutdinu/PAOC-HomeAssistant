@@ -13,15 +13,18 @@ export class LedService {
   url = `http://localhost:8080/`;
 
   room1(LedNumber: number) {
-    return this.httpClient.get(this.url + "led1/"+LedNumber);
+    fetch(this.url + "led1/"+LedNumber);
+    //return this.httpClient.get(this.url + "led1/"+LedNumber);
   }
 
   room2(LedNumber: number) {
-    return this.httpClient.get(this.url + "led2/"+LedNumber);
+    fetch(this.url + "led2/"+LedNumber);
+    //return this.httpClient.get(this.url + "led2/"+LedNumber);
   }
 
   room3(LedNumber: number) {
-    return this.httpClient.get(this.url + "led3/"+LedNumber);
+    fetch(this.url + "led3/"+LedNumber);
+    //return this.httpClient.get(this.url + "led3/"+LedNumber);
   }
 
 }
