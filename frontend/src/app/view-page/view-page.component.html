@@ -10,25 +10,36 @@
     <div></div>
     <div></div>
 </div>
+
 <div class="page">
 
     <div class="charts">
-        <div class="gaz">
-            <p>
+        <div class="gaz chart">
+            <p [ngClass]="{'gaz-on': gaz>=2}">
                 <mat-icon>cloud_queue</mat-icon> Gaz</p>
-            <p><span class="digits">{{gaz}}</span>ppm</p>
+            <p [ngClass]="{'gaz-on': gaz>=2}"><span class="digits" [ngClass]="{'gaz-on': gaz>=2}">{{gaz}}</span >ppm</p>
         </div>
-        <div class="apa">
+        <div class="apa chart">
             <p>
                 <mat-icon>invert_colors</mat-icon> Umiditate</p>
             <p><span class="digits">{{apa}}</span>%</p>
         </div>
     </div>
-    <div class="temp">
-        <p>
-            <mat-icon>wb_sunny</mat-icon> Temperatura</p>
+    <div class="led">
+        <div *ngIf="mobile" class="green-div">
+            <button mat-fab class="green" [ngClass]="{'green-on': gaz<=2}" aria-label="Example icon button with a delete icon">
+       </button>
+        </div>
+        <div class="temp">
+            <p>
+                <mat-icon>wb_sunny</mat-icon> Temperatura</p>
 
-        <p><span class="digits">{{temp}}</span>℃</p>
+            <p><span class="digits">{{temp}}</span>℃</p>
+        </div>
+        <div *ngIf="mobile" class="red-div">
+            <button mat-fab class="red" [ngClass]="{'red-on': gaz>=2}" aria-label="Example icon button with a delete icon">
+          </button>
+        </div>
     </div>
 
 </div>

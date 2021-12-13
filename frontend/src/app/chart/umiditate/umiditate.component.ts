@@ -1,60 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { TempApaModel } from 'src/app/models/TempApaModel';
+import { TemperaturaService } from 'src/app/services/temperatura.service';
 import { UmiditateService } from 'src/app/services/umiditate.service';
 @Component({
   selector: 'app-umiditate',
   templateUrl: './umiditate.component.html',
-  styleUrls: ['../chart.scss']
+  styleUrls: ['./umiditate.component.scss']
 })
 export class UmiditateComponent implements OnInit {
 
-  constructor(private umiditateServise: UmiditateService) { }
+  constructor(private tempService: TemperaturaService) { }
+
+  apa?: TempApaModel;
+  Data = [
+    { apa: 22, time: '12:00' },
+    { apa: 23, time: '13:00' },
+    { apa: 24, time: '14:00' },
+    { apa: 24, time: '15:00' },
+    { apa: 24, time: '16:00' },
+    { apa: 24, time: '17:00' },
+    { apa: 24, time: '18:00' },];
 
   ngOnInit(): void {
-  }
-  // Array of different segments in chart
-  lineChartData: ChartDataSets[] = [
-    { data: [...this.umiditateServise.data], label: 'Umiditate' }
-  ];
-
-  //Labels shown on the x-axis
-  lineChartLabels: Label[] = [...this.umiditateServise.lineChartLabels];
-
-  // Define chart options
-  lineChartOptions: ChartOptions = {
-    responsive: true
-  };
-
-  // Define colors of chart segments
-  lineChartColors: Color[] = [
-
-
-    { // blue
-      backgroundColor: 'rgba(0,0,255,0.5)',
-      borderColor: 'blue',
-      pointBackgroundColor: '#fafafa',
-      pointBorderColor: '#fafafa',
-      pointHoverBackgroundColor: '#fafafa',
-      pointHoverBorderColor: '#fafafa'
-    }
-  ];
-
-  // Set true to show legends
-  lineChartLegend = false;
-
-  // Define type of chart
-  lineChartType: ChartType = 'line';
-  //pieChartType: ChartType = 'pie';
-
-  lineChartPlugins = [];
-
-  // events
-  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+    // this.tempService.getTempAndUmiditateValue().subscribe(data => {
+    //   this.apa = data as TempApaModel;
+    //   console.log(this.apa.humidity);
+    // })
   }
 
-  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
 }

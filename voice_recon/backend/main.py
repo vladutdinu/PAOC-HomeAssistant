@@ -17,21 +17,19 @@ bucket = "astroswipe2021's Bucket"
 ESP_IP="http://192.168.43.47"
 app = Flask(__name__)
 CORS(app)
-@app.route("/")
-def hello_word():
-    return "<p>pwp</p>"
 
-@app.route("/led1/<on>", methods=['POST'])
+
+@app.route("/led1/<on>", methods=['POST', 'GET'])
 def bedroom(on):
     lights.bedroom(float(on))
     return "OK"
 
-@app.route("/led2/<on>", methods=['POST'])
+@app.route("/led2/<on>", methods=['POST', 'GET'])
 def livingroom(on):
     lights.living_room(float(on))
     return "OK"
 
-@app.route("/led3/<on>", methods=['POST'])
+@app.route("/led3/<on>", methods=['POST', 'GET'])
 def garden(on):
     lights.garden(float(on))
     return "OK"
@@ -64,6 +62,21 @@ def humds():
 			"humidity": float(humidity),
 			"time": datetime.now().strftime('%H:%M:%S')
 			}),200)
+
+@app.route("/gas")
+def gas():
+	gas = requests.get(ESP_IP+"/gas").content.decode('utf-8')
+	print(gas)
+	with InfluxDBClient(url="https://eu-central-1-1.aws.cloud2.influxdata.com", token=token, org=org,  verify_ssl=False) as client:
+		write_api = client.write_api(write_options=SYNCHRONOUS)
+		#data="pi4,host=pi4 temp={} humidity={}".format(temperature, humidity)
+		point = Point("mem").tag("host", "pi4").field("humidity", float(gas)).time(datetime.utcnow(), WritePrecision.NS)
+		write_api.write(bucket, org, point)
+		return make_response(jsonify({
+			"gas": float(gas),
+			"time": datetime.now().strftime('%H:%M:%S')
+			}),200)
+
 @app.route("/temperaturi")
 def temperaturi():
 	d={
@@ -108,7 +121,31 @@ def umiditati():
 				d["humidity"].append(float(record['_value']))
 				d["time"].append(str(record['_time'].strftime('%H:%M:%S')))
 		if(len(d)>30):
-				d["humidity"] = d["temp"][-30:]
+				d["humidity"] = d["humidity"][-30:]
+				d["time"] = d["time"][-30:]
+	return make_response(jsonify(d))
+
+@app.route("/gases")
+def gases():
+	d={
+		"gas": [],
+		"time": []
+	}
+	with InfluxDBClient(url="https://eu-central-1-1.aws.cloud2.influxdata.com", token=token, org=org, verify_ssl=False) as client:
+		q4='''
+			from(bucket: "astroswipe2021's Bucket")
+  |> range(start: -30d)
+  |> filter(fn: (r) => r["_measurement"] == "mem")
+  |> filter(fn: (r) => r["_field"] == "gas")
+  |> yield(name: "mean")
+		'''
+		tables = client.query_api().query(q4, org=org)
+		for table in tables:
+			for record in table.records:
+				d["gas"].append(float(record['_value']))
+				d["time"].append(str(record['_time'].strftime('%H:%M:%S')))
+		if(len(d)>30):
+				d["gas"] = d["gas"][-30:]
 				d["time"] = d["time"][-30:]
 	return make_response(jsonify(d))
 

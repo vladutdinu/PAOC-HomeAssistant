@@ -3,7 +3,7 @@
         <div *ngIf="chart==3 || chart==0" class="chart" [ngClass]="{'chart-temp': chart==3}">
             <p>
                 <mat-icon>cloud_queue</mat-icon> Gaz</p>
-            <app-gaz (click)="goTo(1)"></app-gaz>
+            <app-gaz (click)="goTo(3)"></app-gaz>
         </div>
 
 
@@ -17,6 +17,6 @@
     <div *ngIf="chart==1 || chart==0" class="chart chart-temp">
         <p>
             <mat-icon>wb_sunny</mat-icon> Temperatura</p>
-        <app-temperatura (click)="goTo(3)"></app-temperatura>
+        <app-temperatura (click)="goTo(1)"></app-temperatura>
     </div>
 </div>

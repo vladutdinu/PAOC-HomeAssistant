@@ -1,59 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { List } from 'echarts';
 import { Color, Label } from 'ng2-charts';
+import { TempApaModel } from 'src/app/models/TempApaModel';
 import { TemperaturaService } from 'src/app/services/temperatura.service';
+
+export interface PeriodicElement {
+  // time: string;
+  temp: number;
+}
+
 @Component({
   selector: 'app-temperatura',
   templateUrl: './temperatura.component.html',
-  styleUrls: ['../chart.scss']
+  styleUrls: ['./temperatura.component.scss']
 })
+
 export class TemperaturaComponent implements OnInit {
+  interval: any;
 
-  constructor(private tempServise: TemperaturaService) { }
+  constructor(private tempService: TemperaturaService) { }
 
+  temp?: TempApaModel;
+  date: Date = new Date;
+  tempData: number[] = [2, 5];
+  timeData?: String[] = ["12:00", "22:00"];
+  Data = [
+    { temp: 22, time: '12:00' },
+    { temp: 23, time: '13:00' },
+    { temp: 24, time: '14:00' },
+    { temp: 24, time: '15:00' },
+    { temp: 24, time: '16:00' },
+    { temp: 24, time: '17:00' },
+    { temp: 24, time: '18:00' },];
   ngOnInit(): void {
+
+    // this.setValue();
+    this.tempService.getTempValues().subscribe(data => {
+      this.temp = data;
+      this.tempData = this.temp.temp.slice(-7);
+      this.timeData = this.temp.time.slice(-7);
+    })
   }
-  // Array of different segments in chart
-  lineChartData: ChartDataSets[] = [
-    { data: [...this.tempServise.data], label: 'temperatura' },
+  columns = [
+    // {
+    //   columnDef: 'time',
+    //   header: 'time',
+    //   cell: (element: PeriodicElement) => `${element.time}`,
+    // },
+    {
+      columnDef: 'temp',
+      header: 'temp',
+      cell: (element: PeriodicElement) => `${element.temp}`,
+    },
   ];
-
-  //Labels shown on the x-axis
-  lineChartLabels: Label[] = [...this.tempServise.lineChartLabels];
-
-  // Define chart options
-  lineChartOptions: ChartOptions = {
-    responsive: true
-  };
-
-  // Define colors of chart segments
-  lineChartColors: Color[] = [
-    { // red
-      backgroundColor: 'rgba(255,0,0,0.3)',
-      borderColor: 'red',
-      pointBackgroundColor: '#fafafa',
-      pointBorderColor: '#fafafa',
-      pointHoverBackgroundColor: '#fafafa',
-      pointHoverBorderColor: '#fafafa'
-    }
-
-  ];
-
-  // Set true to show legends
-  lineChartLegend = false;
-
-  // Define type of chart
-  lineChartType: ChartType = 'line';
-  //pieChartType: ChartType = 'pie';
-
-  lineChartPlugins = [];
-
-  // events
-  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
+  dataSource = this.tempData;
+  displayedColumns = this.columns.map(c => c.columnDef);
 }
+
+
