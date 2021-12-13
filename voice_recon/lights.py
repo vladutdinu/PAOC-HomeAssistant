@@ -5,7 +5,7 @@ GPIO.setwarnings(False)
 GPIO.setup(18, GPIO.OUT) #18, 23, 25, 20
 GPIO.setup(20, GPIO.OUT) 
 GPIO.setup(26, GPIO.OUT) 
-GPIO.setup(25, GPIO.OUT) 
+GPIO.setup(23, GPIO.OUT) 
 def bedroom():
     print("Led on")
     GPIO.output(26, GPIO.HIGH)
@@ -16,11 +16,11 @@ def bedroom():
 
 def living_room():
     print("Led on")
-    GPIO.output(25, GPIO.HIGH)
+    GPIO.output(23, GPIO.HIGH)
 
     time.sleep(2)
     print("Led off")
-    GPIO.output(25, GPIO.LOW)
+    GPIO.output(23, GPIO.LOW)
 
 
 def garden():
@@ -43,4 +43,4 @@ if __name__ == "__main__":
     bedroom()
     living_room()
     garden()
-    wind()
+    #wind()
