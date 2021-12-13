@@ -15,8 +15,8 @@
 .led {
     display: flex;
     flex-direction: row;
-    position: fixed;
-    right: 0;
+    position: absolute;
+    right: 0px;
 }
 
 .matMenu {
@@ -195,7 +195,8 @@
     width: 150px;
     padding: 10px;
     margin: 5px;
-    border: 5px solid #4b4b4b;
+    border: 3px solid #4b4b4b;
+    border-radius: 30px;
     text-align: center;
     text-transform: uppercase;
     box-shadow: 8px 8px 0 0px rgba(105, 109, 120, .5);
